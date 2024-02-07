@@ -5,6 +5,10 @@ canvas.height = innerHeight;
 c.imageSmoothingEnabled = true;
 
 const scoreEl = document.querySelector('#scoreElement');
+const startGameBtn = document.querySelector('#start-Btn');
+const modalEl = document.querySelector('#modalEl');
+const SCORE = document.querySelector('.score');
+
 
 
 class Player{
@@ -22,8 +26,6 @@ class Player{
 
     }
 }
-
-
 class Projectile{
     constructor(x,y,radius,color,velocity){
         this.x = x;
@@ -45,8 +47,6 @@ class Projectile{
 
     }
 }
-
-
 class Enemy{
     constructor(x,y,radius,color,velocity){
         this.x = x;
@@ -99,10 +99,21 @@ class Particle{
 const x = canvas.width/2;
 const y = canvas.height/2;
 
-const player = new Player(x,y,30,'white')
-const projectiles = [];
-const enemies = [];
-const particles = [];
+let player = new Player(x,y,30,'white')
+let projectiles = [];
+let enemies = [];
+let particles = [];
+
+
+function initiate(){
+ player = new Player(x,y,30,'white')
+ projectiles = [];
+ enemies = [];
+ particles = [];
+scoreEl.innerHTML = 0;
+SCORE.innerHTML = 0;
+
+}
 
 function spwanEnemies(){
     setInterval(()=>{
@@ -172,6 +183,9 @@ function animate() {
         const distance = Math.hypot(player.x - enemy.x, player.y - enemy.y);
         if (distance - enemy.radius - player.radius < 1) {
             cancelAnimationFrame(animationId);
+            modalEl.style.display = 'flex';
+            SCORE.innerHTML = score;
+
         }
     });
     // Removing the enemy and projectiles when they the collide with each other 
@@ -226,5 +240,11 @@ addEventListener('click',(e) => {
     }
     projectiles.push(new Projectile(canvas.width/2,canvas.height/2,5,'white',velocity))
 })
-animate();
-spwanEnemies();
+
+
+startGameBtn.addEventListener('click',function(){
+    initiate();
+    animate();
+    spwanEnemies();
+    modalEl.style.display = 'none';
+})

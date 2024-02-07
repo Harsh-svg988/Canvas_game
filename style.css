@@ -1,3 +1,27 @@
 body{
     margin:0;
+    background-color: black;
+}
+.fixed{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.btn{
+
+    width:100%;
+    font-size: 30px;
+    background-color: blue;
+    
+    
+}
+.score{
+    font-size: 40px;
+    text-align: center;
+
+}
+.poi{
+text-align: center;
+font-size: larger;
 }
