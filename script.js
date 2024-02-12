@@ -57,7 +57,7 @@ class Enemy{
     }
     draw (){
         c.beginPath();
-        c.arc(this.x, this.y, this.radius, 0,2*Math.PI,false);
+        c.arc(this.x, this.y, this.radius, 0,2*Math.PI,false);// 0 to 2PI  is angle of the circle. FALSE is for clockwise direction
         c.fillStyle=this.color;
         c.fill();
     }
@@ -124,7 +124,7 @@ function spwanEnemies(){
             x = Math.random() < 0.5 ? 0 - radius : canvas.width + radius;
             y = Math.random () * canvas.height;
         }
-        else {
+        else{
             x = Math.random () * canvas.width;
             y = Math.random() < 0.5 ? 0 - radius : canvas.height + radius;
         }
@@ -162,7 +162,7 @@ function animate() {
     //Updating the projectiles in every frame
     projectiles.forEach((projectile,index) => {
         projectile.update();
-
+        
         // this condition helps in removing the projectiles from array if it goes out of the window without colliding
         if(projectile.x + projectile.radius < 0 ||
            projectile.x - projectile.radius > canvas.width ||
@@ -240,7 +240,6 @@ addEventListener('click',(e) => {
     }
     projectiles.push(new Projectile(canvas.width/2,canvas.height/2,5,'white',velocity))
 })
-
 
 startGameBtn.addEventListener('click',function(){
     initiate();
